@@ -13,8 +13,8 @@ import { authActions } from "../store/auth-slice";
 
 function Message(props) {
   useEffect((item) => {
-    console.log(props.listofmatchuser);
-  }, [props.listofmatchuser]);
+    console.log(props.matchedUsersList);
+  }, [props.matchedUsersList]);
   const userlog = useSelector((state) => state.auth.user);
   const [curruser, setcurruser] = useState([]);
   const [searchUser, setSearchUser] = useState("");
@@ -28,7 +28,7 @@ function Message(props) {
       .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
       .then((res) => {
         if (res.data) {
-          setcurruser(props.listofmatchuser);
+          setcurruser(props.matchedUsersList);
           
         }
       });

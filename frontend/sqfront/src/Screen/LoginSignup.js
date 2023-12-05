@@ -1,34 +1,41 @@
-import React from 'react'
-import Login from '../Components/Login';
-import Signup from '../Components/Signup';
-
+import React, { useState } from "react";
+import Login from "../Components/Login";
+import SignUp from "../Components/SignUp";
 
 const LoginSignup = () => {
-    const [toggle, setToggle] = React.useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
 
-    const toggleauth = () =>{
-        setToggle(!toggle);
-    }
-    return (
-        <div>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-4'>
-                    </div>
-                    <div className='col-md-4'>
-                        <button type="button" onClick={toggleauth} className={ (toggle ? 'btn btn-primary' : 'btn btn-light') }>Login</button>
-                        <button type="button" onClick={toggleauth} className={ (!toggle ? 'btn btn-primary' : 'btn btn-light') }>Signup</button>
-                    </div>
-                    <div className='col-md-4'>
-                    </div>
-                </div>
-                {
-                    toggle ? <Login /> : <Signup />
-                }
+  const toggleAuth = () => {
+    setIsSignUp(!isSignUp);
+  };
 
-            </div>
+  return (
+    <div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <button
+              type="button"
+              onClick={toggleAuth}
+              className={isSignUp ? "btn btn-light" : "btn btn-primary"}
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              onClick={toggleAuth}
+              className={isSignUp ? "btn btn-primary" : "btn btn-light"}
+            >
+              SignUp
+            </button>
+          </div>
+          <div className="col-md-4"></div>
         </div>
-    )
-}
+        {isSignUp ? <SignUp />: <Login /> }
+      </div>
+    </div>
+  );
+};
 
-export default LoginSignup
+export default LoginSignup;

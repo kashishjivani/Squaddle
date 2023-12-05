@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import MatchDispProf from "./MatchDispProf";
 import LikedDispProf from "./LikedDispProf";
 import Modalmatchinfo from "./Modalmatchinfo";
-import axios from "axios";
 
-const Matchdisplay = (props) => {
+const MatchDisplay = (props) => {
   const [displikeprof, setdisplikeprof] = useState(false);
   const [dispmatchmodal, setdispmatchmodal] = useState(false);
   const [userdata, setuserdata] = useState({});
@@ -52,7 +51,7 @@ const Matchdisplay = (props) => {
     }
     
     setmatcharr(finalmatcharr);
-    props.setlistofmatchuser(finalmatcharr);
+    props.setMatchedUsersList(finalmatcharr);
   }, [props.userinfo.matches, match]);
 
   useEffect(() => {}, []);
@@ -92,4 +91,4 @@ const Matchdisplay = (props) => {
   );
 };
 
-export default Matchdisplay;
+export default MatchDisplay;

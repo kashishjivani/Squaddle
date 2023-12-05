@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Navb from "./Components/Navb";
+import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./Components/Navbar";
 import LoginSignup from "./Screen/LoginSignup";
 import Aboutus from "./Screen/Aboutus";
 import Home from "./Screen/Home";
 import Footer from "./Components/Footer";
 import Profile from "./Screen/Profile";
-import { BrowserRouter } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
 import Message from "./Screen/Message";
-import { useSelector } from "react-redux";
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const [listofmatchuser, setlistofmatchuser] = useState([]);
+  const [matchedUsersList, setMatchedUsersList] = useState([]);
   
   return (
     <div>
-      <>
         <BrowserRouter>
-          <Navb />
+          <Navbar />
           <Routes>
             <Route
               path="/"
               element={
                 isLoggedIn ? (
                   <Home
-                    listofmatchuser={listofmatchuser}
-                    setlistofmatchuser={setlistofmatchuser}
+                    matchedUsersList={matchedUsersList}
+                    setMatchedUsersList={setMatchedUsersList}
                   />
                 ) : (
                   <LoginSignup />
@@ -44,7 +43,7 @@ const App = () => {
               path="/dm"
               element={
                 isLoggedIn ? (
-                  <Message listofmatchuser={listofmatchuser} />
+                  <Message matchedUsersList={matchedUsersList} />
                 ) : (
                   <LoginSignup />
                 )
@@ -54,7 +53,6 @@ const App = () => {
           </Routes>
           <Footer />
         </BrowserRouter>
-      </>
     </div>
   );
 };

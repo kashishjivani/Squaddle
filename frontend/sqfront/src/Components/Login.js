@@ -1,31 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [loginsuccess, setLoginsuccess] = React.useState(false);
-  const [loginfail, setLoginfail] = React.useState(false);
+  const [loginInfo, setLoginInfo] = useState({
+    email: "",
+    password: "",
+  });
+  const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
+  const [isLoginFail, setIsLoginFail] = useState(false);
 
-  const textupdate = (e) => {
-    const { name, value } = e.target;
-    if (name === "email") {
-      setEmail(value);
-    }
-    if (name === "password") {
-      setPassword(value);
-    }
+  const handleChange = (e) => {
+    setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
 
   const login = (e) => {
     e.preventDefault();
+    const { email, password } = loginInfo;
     axios
       .post(
         "http://localhost:4000/api/v1/login",
@@ -37,45 +34,43 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        
         setCookie("email", res.data.email);
         setCookie("token", res.data.token);
-        setLoginsuccess(true);
-        setLoginfail(false);
+        setIsLoginSuccessfull(true);
+        setIsLoginFail(false);
         dispatch(authActions.login());
         dispatch(authActions.currentloggeduser({ email: email }));
         navigate("/");
       })
       .catch(() => {
-        
-        setLoginfail(true);
-        setLoginsuccess(false);
+        setIsLoginFail(true);
+        setIsLoginSuccessfull(false);
       });
   };
 
   return (
     <div>
-      {loginsuccess && (
+      {isLoginSuccessfull && (
         <div className="alert alert-success" role="alert">
           Login Successful
         </div>
       )}
-      {loginfail && (
+
+      {isLoginFail && (
         <div className="alert alert-danger" role="alert">
           Login Failed
         </div>
       )}
 
-      <form>
+      <form onSubmit={login}>
         <h1>Login</h1>
         <div className="mb-3">
           <label className="form-label">Email address</label>
           <input
             type="email"
             className="form-control"
-            onChange={textupdate}
+            onChange={handleChange}
             name="email"
-            value={email}
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
@@ -88,15 +83,14 @@ const Login = () => {
           <input
             type="password"
             className="form-control"
-            onChange={textupdate}
+            onChange={handleChange}
             name="password"
-            value={password}
             id="exampleInputPassword1"
           />
         </div>
         <a href="/">Forget Password?</a>
         <br />
-        <button type="button" onClick={login} className="btn btn-dark">
+        <button type="submit" className="btn btn-dark">
           Login
         </button>
       </form>

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Components/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../store/auth-slice";
-import Filter from "../Components/Filter";
-import Matchdisplay from "../Components/Matchdisplay";
-import axios from "axios";
+import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+import Card from "../Components/Card";
+import Filter from "../Components/Filter";
+import MatchDisplay from "../Components/MatchDisplay";
 
-const Home = (props) => {
-  
+const Home = ({ matchedUsersList, setMatchedUsersList}) => {
   const userlog = useSelector((state) => state.auth.user);
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [interestforfilter, setinterestforfilter] = useState("");
@@ -19,15 +17,13 @@ const Home = (props) => {
   const [userloaded, setuserloaded] = useState(false);
   const [cardNumber, setCardNumber] = useState(0);
   const [userinpendinglist, setuserinpendinglist] = useState([]);
-  
+
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
         setstoregetuser(res.data);
-        
       }
-
     });
   }, []);
   useEffect(() => {
@@ -62,7 +58,7 @@ const Home = (props) => {
       axios
         .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
         .then((res) => {
-          setcurruser(res.data)
+          setcurruser(res.data);
         })
         .catch((err) => {});
     }
@@ -70,43 +66,36 @@ const Home = (props) => {
 
   useEffect(() => {
     let temparr = [];
-    console.log(curruser)
-    console.log(user)
+    console.log(curruser);
+    console.log(user);
     if (curruser.matches) {
-      
       let temp = user.filter((item) => {
-        
         if (item.email !== cookies.email) {
           // console.log("here is curr", curruser)
           if (curruser.matches.find((ite) => ite.email === item.email)) {
-            console.log("match m ")
+            console.log("match m ");
           } else if (
             curruser.leftSwipe.find((ite) => ite.email === item.email)
           ) {
-            console.log("left swipe ")
-
+            console.log("left swipe ");
           } else {
             temparr.push(item);
-            
           }
         }
       });
-    }
-    else{
-      temparr = user.filter ( (item)=>{
-        if(item.email!==cookies.email){
+    } else {
+      temparr = user.filter((item) => {
+        if (item.email !== cookies.email) {
+        } else {
+          return item;
         }
-        else{
-          return item
-        }
-      })
-
+      });
     }
 
-    console.log(temparr)
-    console.log(userinpendinglist)
-    setuserinpendinglist(temparr)
-    setuserloaded(true)
+    console.log(temparr);
+    console.log(userinpendinglist);
+    setuserinpendinglist(temparr);
+    setuserloaded(true);
   }, [user]);
 
   return (
@@ -114,12 +103,12 @@ const Home = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Matchdisplay
+            <MatchDisplay
               user={user}
               userinfo={curruser}
               email={cookies.email}
-              listofmatchuser={props.listofmatchuser}
-              setlistofmatchuser={props.setlistofmatchuser}
+              matchedUsersList={matchedUsersList}
+              setMatchedUsersList={setMatchedUsersList}
             />
           </div>
           <div className="col-md-2"></div>
@@ -143,8 +132,6 @@ const Home = (props) => {
                 })
               : "Loading"}
           </div>
-          {/* <div className='col-md-1'>
-            </div> */}
           <div className="col-md-3">
             {filteron && (
               <button
@@ -152,7 +139,7 @@ const Home = (props) => {
                 className="btn btn-primary"
                 onClick={() => setfilteron(!filteron)}
               >
-              Filter by +
+                Filter by +
               </button>
             )}
             {!filteron && (
@@ -162,7 +149,7 @@ const Home = (props) => {
                   className="btn btn-primary"
                   onClick={() => setfilteron(!filteron)}
                 >
-                Filter by -
+                  Filter by -
                 </button>
                 <Filter
                   interestforfilter={interestforfilter}
