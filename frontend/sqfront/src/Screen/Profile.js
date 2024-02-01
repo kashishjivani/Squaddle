@@ -16,7 +16,7 @@ const Profile = () => {
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
+      .get(`https://squddle-backend.onrender.com/api/v1userinfo?email=${cookies.email}`)
       .then((res) => {
         if (res.data) {
           setUserdata(res.data);
@@ -125,7 +125,7 @@ const Profile = () => {
   const submitprofiledb = () => {
     axios
         .put(
-          "http://localhost:4000/api/v1/register",
+          "https://squddle-backend.onrender.com/api/v1register",
           {
             ...Profobj,
             email: cookies.email,

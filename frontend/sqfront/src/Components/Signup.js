@@ -21,8 +21,8 @@ const SignUp = () => {
     const { name, email, password, password2 } = userInfo;
     if (password) {
       if (password === password2) {
-        // const api_url = "http://localhost:4000/api/v1/register";
-        const api_url = "https://squddle-backend.onrender.com/";
+        // const api_url = "http://localhost:4000/api/v1register";
+        const api_url = "https://squddle-backend.onrender.com/api/v1/register";
         axios
           .post(
             api_url,

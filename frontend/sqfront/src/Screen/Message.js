@@ -25,7 +25,7 @@ function Message(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
+      .get(`https://squddle-backend.onrender.com/api/v1userinfo?email=${userlog.email}`)
       .then((res) => {
         if (res.data) {
           setcurruser(props.matchedUsersList);
@@ -46,7 +46,7 @@ function Message(props) {
     if (toemailuser) {
       axios
         .get(
-          `http://localhost:4000/api/v1/message?from_email=${toemailuser}&to_email=${cookies.email}`,
+          `https://squddle-backend.onrender.com/api/v1message?from_email=${toemailuser}&to_email=${cookies.email}`,
           { mode: "cors" },
           { withCredentials: true }
         )
@@ -64,7 +64,7 @@ function Message(props) {
     if (toemailuser) {
       axios
         .get(
-          `http://localhost:4000/api/v1/message?from_email=${cookies.email}&to_email=${toemailuser}`,
+          `https://squddle-backend.onrender.com/api/v1message?from_email=${cookies.email}&to_email=${toemailuser}`,
           { mode: "cors" },
           { withCredentials: true }
         )
@@ -105,7 +105,7 @@ function Message(props) {
     setIsSend(true);
     // console.log("hello bhai print karo ");
     axios
-      .post("http://localhost:4000/api/v1/message", {
+      .post("https://squddle-backend.onrender.com/api/v1message", {
         from_email: cookies.email,
         to_email: toemailuser,
         message: currmsg,

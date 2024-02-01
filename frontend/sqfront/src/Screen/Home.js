@@ -19,7 +19,7 @@ const Home = ({ matchedUsersList, setMatchedUsersList}) => {
   const [userinpendinglist, setuserinpendinglist] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
+    axios.get("https://squddle-backend.onrender.com/api/v1getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
         setstoregetuser(res.data);
@@ -56,7 +56,7 @@ const Home = ({ matchedUsersList, setMatchedUsersList}) => {
     if (cookies.email) {
       // console.log(userlog);
       axios
-        .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
+        .get(`https://squddle-backend.onrender.com/api/v1userinfo?email=${cookies.email}`)
         .then((res) => {
           setcurruser(res.data);
         })

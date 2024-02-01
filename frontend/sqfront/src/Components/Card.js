@@ -19,7 +19,7 @@ const Card = (props) => {
     console.log("cookies wala", cookies.email)
     setleftswipeclick(true);
     props.setCardNumber(props.cardNumber + 1);
-    axios.put("http://localhost:4000/api/v1/leftswipe", {
+    axios.put("https://squddle-backend.onrender.com/api/v1leftswipe", {
       email: cookies.email,
       leftSwipeEmail : props.fuser.email,
     }, {mode:'cors'},{ withCredentials: true }).then(res => {
@@ -31,7 +31,7 @@ const Card = (props) => {
     console.log("right me swipe ", props.fuser.email)
     setrightswipeclick(true);
     props.setCardNumber(props.cardNumber + 1);
-    axios.put("http://localhost:4000/api/v1/addmatch", {
+    axios.put("https://squddle-backend.onrender.com/api/v1addmatch", {
       email: cookies.email,
       matchedEmail : props.fuser.email,
     }, {mode:'cors'},{ withCredentials: true }).then(res => {

@@ -25,7 +25,7 @@ const Login = () => {
     const { email, password } = loginInfo;
     axios
       .post(
-        "http://localhost:4000/api/v1/login",
+        "https://squddle-backend.onrender.com/api/v1login",
         {
           email: email,
           password: password,
