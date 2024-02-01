@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "../Components/Login";
-import SignUp from "../Components/SignUp";
+import SignUp from "../Components/Signup";
 
 const LoginSignup = () => {
   const [isSignUp, setIsSignUp] = useState(false);
