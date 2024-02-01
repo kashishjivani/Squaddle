@@ -9,6 +9,7 @@ const SignUp = () => {
     password: "",
     password2: ""
   });
+  
   const [isSignUpsuccessfull, setIsSignUpSuccessfull] = useState(false);
   const [isSignUpFail, setIsSignUpFail] = useState(false);
 
