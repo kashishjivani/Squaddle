@@ -2,7 +2,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
 const Message = require("../models/messageModel");
-const sendToken = require("../utils/jwttoken");
+const sendToken = require("../utils/jwtToken");
 
 //Register User
 

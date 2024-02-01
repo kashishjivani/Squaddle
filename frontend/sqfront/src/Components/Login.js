@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
@@ -62,7 +62,7 @@ const Login = () => {
         </div>
       )}
 
-      <form onSubmit={login}>
+      <form onSubmit={login} className="container w-50">
         <h1>Login</h1>
         <div className="mb-3">
           <label className="form-label">Email address</label>

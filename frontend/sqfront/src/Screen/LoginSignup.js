@@ -18,7 +18,7 @@ const LoginSignup = () => {
             <button
               type="button"
               onClick={toggleAuth}
-              className={isSignUp ? "btn btn-light" : "btn btn-primary"}
+              className={isSignUp ? "btn btn-light m-2" : "btn btn-primary m-2"}
             >
               Login
             </button>

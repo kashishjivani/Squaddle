@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import { useCookies } from "react-cookie";
 import "./Navbar.css";
+import logo from "../Image/favicon.ico";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+        <Link to="/" className="nav-link active" aria-current="page">
+          <img src={logo} height={50} width={50} alt="logo" className="pb-1" />
+        </Link>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -51,23 +55,20 @@ function Navbar() {
               )}
             </li>
           </ul>
-            <Link to="/profile">
-              {isLoggedIn && (
-                <button className="btn btn-outline-success" type="submit">
-                  Edit Profile
-                </button>
-              )}
-            </Link>
-            <Link to="/login">
-              {isLoggedIn && (
-                <button
-                className="btn btn-outline-success"
-                onClick={logout}
-              >
+          <Link to="/profile">
+            {isLoggedIn && (
+              <button className="btn btn-outline-success" type="submit">
+                Edit Profile
+              </button>
+            )}
+          </Link>
+          <Link to="/login">
+            {isLoggedIn && (
+              <button className="btn btn-outline-success" onClick={logout}>
                 Logout
               </button>
-              )}
-            </Link>
+            )}
+          </Link>
         </div>
       </div>
     </nav>

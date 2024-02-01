@@ -61,7 +61,7 @@ const SignUp = () => {
         </div>
       )}
 
-      <form onSubmit={signup}>
+      <form onSubmit={signup} className="container w-50">
         <h1> SignUp</h1>
         <div className="mb-3">
           <label className="form-label">Name</label>
